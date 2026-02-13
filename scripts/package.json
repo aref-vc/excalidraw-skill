@@ -1,0 +1,10 @@
+{
+  "name": "excalidraw-renderer",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "roughjs": "^4.6.6",
+    "@xmldom/xmldom": "^0.9.8",
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
