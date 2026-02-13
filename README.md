@@ -2,7 +2,7 @@
 
 A Claude Code skill that transforms any text prompt into a hand-drawn Excalidraw-style diagram, saved as SVG + PNG locally. No browser, no Puppeteer, no MCP server.
 
-![Example output](https://github.com/user-attachments/assets/placeholder.png)
+![Example output](assets/sample-architecture.png)
 
 ## What it does
 
@@ -18,7 +18,7 @@ Output uses the authentic Excalidraw look: Virgil handwritten font for labels, C
 
 ```bash
 # Clone into your Claude Code skills directory
-git clone https://github.com/yourusername/excalidraw-skill.git ~/.claude/skills/excalidraw
+git clone https://github.com/aref-vc/excalidraw-skill.git ~/.claude/skills/excalidraw
 
 # Install renderer dependencies
 cd ~/.claude/skills/excalidraw/scripts && npm install
