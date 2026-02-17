@@ -42,12 +42,32 @@ Read `references/element-format.md` (relative to this skill's directory) for the
 ### Step 3: Generate diagram JSON
 
 Create a JSON object following the element format. Key rules:
+
+**IDs and references:**
 - Give every shape that receives/sends arrows a unique `id`
-- Use pastel fills from the color palette for readability
+- Arrow `from`/`to` reference shape IDs
+
+**Text and labels (CRITICAL for clean output):**
+- Use the `subtitle` property on title `text` elements for descriptive text below titles. NEVER create separate overlapping text elements.
+- Use the `annotation` property on shapes for technical details (endpoint, protocol, size). NEVER place separate `text` elements near shapes for this purpose.
+- Use `sectionLabel` property on zone rectangles. NEVER place separate `text` elements over zone boundaries.
+- Keep arrow labels to 1-3 words. The renderer auto-positions them to avoid collisions.
+
+**Sizing shapes for content:**
+- Shapes without annotations: min height 60-80px
+- Shapes with annotations: min height 90-120px (annotations need room below the label)
+- Increase width for long labels (the renderer wraps to shape width minus 28px padding)
+
+**Spacing and layout:**
 - Space shapes 60-80px apart minimum
 - Keep 40px padding from canvas edges
+- Calculate canvas dimensions from content (see element-format.md for formula)
+- Never stack more than 2 text blocks in the same vertical column at the bottom of the diagram
+
+**Style:**
 - Use `rounded: true` for service/component rectangles
-- Arrow `from`/`to` reference shape IDs — the renderer auto-routes them
+- Use pastel fills from the color palette for readability
+- Zone rectangles use very faint fills (e.g., `#e7f5ff`) with `sectionLabel`
 
 ### Step 4: Render
 
@@ -77,3 +97,17 @@ Tell the user the file paths for both SVG and PNG. Open the PNG for visual inspe
 - `/excalidraw microservices architecture with 4 services`
 - `/excalidraw decision flowchart for code review process`
 - `draw me a hand-drawn diagram of the deployment pipeline`
+
+## Common Mistakes to Avoid
+
+1. **Overlapping text**: Never place two `text` elements at similar Y positions. Use `subtitle` property instead.
+2. **Floating annotations**: Never use separate `text` elements for shape descriptions. Use the `annotation` property on the shape itself.
+3. **Zone labels as text**: Never use a `text` element for zone/section names. Use `sectionLabel` on the zone rectangle.
+4. **Tiny annotations**: Never use fontSize below 13 for any text. The renderer enforces a minimum of 13px.
+5. **Cramped shapes**: When adding `annotation` to a shape, increase its height to at least 90px.
+6. **Text pile-ups**: If the diagram has notes or key findings at the bottom, keep them to a single `text` element with `subtitle`, not multiple stacked elements.
+
+## Requirements
+
+- Node.js 18+
+- Dependencies installed: `cd scripts && npm install`
